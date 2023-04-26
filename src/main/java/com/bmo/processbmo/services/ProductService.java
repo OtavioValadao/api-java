@@ -2,7 +2,9 @@ package com.bmo.processbmo.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,13 @@ public class ProductService {
      * Get the list of products
      * @return The list of products
      */
-    public List<Product> getAll(){
-        return productRepository.findAll();
+    public List<ProdutDTO> getAll(){
+
+        List<Product> products = productRepository.findAll();
+
+        return products.stream()
+        .map(product -> new ModelMapper().map(product, ProductDTO.class))
+        .collect(Collectors.toList());
     }
 
     /**
@@ -29,7 +36,7 @@ public class ProductService {
      * @param id Of the product that will be located.
      * @return One product if it has been found.
      */
-    public Optional<Product> getbyId(Integer id){
+    public Optional<ProdutDTO> getbyId(Integer id){
         return productRepository.findById(id);
     }
 
@@ -38,7 +45,7 @@ public class ProductService {
      * @param product That will be added
      * @return The product that was added to the list.
      */
-    public Product add(Product product){
+    public ProdutDTO add(ProdutDTO product){
         return productRepository.save(product);
     }
 
@@ -46,16 +53,8 @@ public class ProductService {
      * Method to delete products by passing the ID.
      * @param id Of the product that will be deleted.
      */
-    public ResponseEntity<Void> delete(Integer id) {
-        ProductService product = new ProductService();
-        product.getbyId(id);
-
-        if (product.isPresent()) {
-            produtoRepository.delete(produtoOptional.get());
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deleteProduct(Integer id) {
+        productRepository.deleteById(id);
     }
 
 
@@ -65,8 +64,9 @@ public class ProductService {
      * @param product That will be updated.
      * @return The product after updating the list.
      */
-    public Product update(Integer id, Product product){        
-        product.setId(id);
-        return productRepository.update(product);
+    
+    public Product update(Product product){        
+        productRepository.merge(product);
+        return product;
     }
 }
