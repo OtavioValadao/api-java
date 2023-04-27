@@ -73,9 +73,9 @@ public class ProductService {
      */
     public void deleteProduct(Integer id) {
 
-        Optional<Product> product = productRepository.findById(id);
+        Optional<Product> productFindId = productRepository.findById(id);
 
-        if(product.isEmpty()){
+        if(productFindId.isEmpty()){
             throw new ResourceNotFoundException("Não foi possível deletar o produto com o id:"+ id);
         }
 
