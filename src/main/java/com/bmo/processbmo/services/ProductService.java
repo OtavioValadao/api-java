@@ -3,14 +3,13 @@ package com.bmo.processbmo.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.bmo.processbmo.model.Product;
+import com.bmo.processbmo.model.exception.ResourceNotFoundException;
 import com.bmo.processbmo.repository.ProductRepository;
+import com.bmo.processbmo.shared.ProdutDTO;
 
 @Service
 public class ProductService {
@@ -27,7 +26,7 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
 
         return products.stream()
-        .map(product -> new ModelMapper().map(product, ProductDTO.class))
+        .map(product -> new ModelMapper().map(product, ProdutDTO.class))
         .collect(Collectors.toList());
     }
 
@@ -37,7 +36,16 @@ public class ProductService {
      * @return One product if it has been found.
      */
     public Optional<ProdutDTO> getbyId(Integer id){
-        return productRepository.findById(id);
+        Optional<Product> product = productRepository.findById(id);
+        
+        if(product.isEmpty()){
+            throw new ResourceNotFoundException("Produto com id: " + id + " não encontrado");
+        }
+
+        ProdutDTO produtDTO = new ModelMapper().map(product.get(), ProdutDTO.class);
+
+        return Optional.of(produtDTO);
+        
     }
 
     /**
@@ -45,8 +53,18 @@ public class ProductService {
      * @param product That will be added
      * @return The product that was added to the list.
      */
-    public ProdutDTO add(ProdutDTO product){
-        return productRepository.save(product);
+    public ProdutDTO add(ProdutDTO productDTO){
+        productDTO.setId(null);   
+        
+        ModelMapper mapper = new ModelMapper();
+
+        Product product = mapper.map(productDTO, Product.class);
+        
+        product = productRepository.save(product);
+
+        productDTO.setId(product.getId());
+
+        return productDTO;
     }
 
     /**
@@ -54,6 +72,13 @@ public class ProductService {
      * @param id Of the product that will be deleted.
      */
     public void deleteProduct(Integer id) {
+
+        Optional<Product> product = productRepository.findById(id);
+
+        if(product.isEmpty()){
+            throw new ResourceNotFoundException("Não foi possível deletar o produto com o id:"+ id);
+        }
+
         productRepository.deleteById(id);
     }
 
@@ -65,8 +90,17 @@ public class ProductService {
      * @return The product after updating the list.
      */
     
-    public Product update(Product product){        
-        productRepository.merge(product);
-        return product;
+    public ProdutDTO update(Integer id, ProdutDTO produtDTO){        
+
+        produtDTO.setId(id);
+
+        ModelMapper mapper = new ModelMapper();
+
+        Product product = mapper.map(produtDTO, Product.class);
+
+        productRepository.save(product);
+
+        return produtDTO;
+
     }
 }
