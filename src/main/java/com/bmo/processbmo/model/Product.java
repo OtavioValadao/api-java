@@ -11,13 +11,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String name;
-
     private Integer quantity;
-
     private Double value;
-
     private String observation;
     //#endregion
 

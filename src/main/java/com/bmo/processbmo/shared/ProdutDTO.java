@@ -3,13 +3,9 @@ package com.bmo.processbmo.shared;
 public class ProdutDTO {
 
     private Integer id;
-
     private String name;
-
     private Integer quantity;
-
     private Double value;
-
     private String observation;
     //#endregion
 
