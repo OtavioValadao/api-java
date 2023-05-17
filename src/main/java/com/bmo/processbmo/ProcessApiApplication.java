@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProcessBmoApplication {
+public class ProcessApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProcessBmoApplication.class, args);
+		SpringApplication.run(ProcessApiApplication.class, args);
 	}
 
 }

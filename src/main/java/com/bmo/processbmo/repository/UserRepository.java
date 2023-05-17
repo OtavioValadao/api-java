@@ -8,6 +8,6 @@ import com.bmo.processbmo.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    UserDetails findByLogin(String username);
+    //UserDetails findByLogin(String username);
     
 }
