@@ -53,7 +53,6 @@ public class ProductController {
 
         return new ResponseEntity<>(mapper.map(produtDTO, ProductResponse.class), HttpStatus.CREATED );
 
-        
     }
 
     /**
@@ -75,7 +74,7 @@ public class ProductController {
         productService.deleteProduct(id);
         
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    };
     
     @PutMapping("/{id}")
     @Transactional
