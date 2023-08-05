@@ -3,9 +3,15 @@ package com.bmo.processbmo.view.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,12 +29,21 @@ import com.bmo.processbmo.view.Model.ProductResponse;
 
 @RestController
 @RequestMapping("/api/products")
+@Tag(name= "Gerenciamento de produtos Api")
 public class ProductController {
     
     @Autowired
     private ProductService productService;
 
-    @GetMapping
+    @Operation(summary = "Realiza consulta de produtos", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados da requisição inválida"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não autenticado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca dos produtos.")
+    })
+    @GetMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<ProductResponse>> getAll(){
         List<ProdutDTO> productDTOs = productService.getAll();
 
