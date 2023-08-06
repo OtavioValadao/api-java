@@ -43,7 +43,7 @@ public class ProductController {
             @ApiResponse(responseCode = "401", description = "Usuário não autenticado"),
             @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca dos produtos.")
     })
-    @GetMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @GetMapping()
     public ResponseEntity<List<ProductResponse>> getAll(){
         List<ProdutDTO> productDTOs = productService.getAll();
 

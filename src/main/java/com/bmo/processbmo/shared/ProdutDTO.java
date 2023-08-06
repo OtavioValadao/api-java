@@ -1,5 +1,7 @@
 package com.bmo.processbmo.shared;
 
+import com.bmo.processbmo.model.Address;
+
 public class ProdutDTO {
 
     private Integer id;
@@ -7,6 +9,8 @@ public class ProdutDTO {
     private Integer quantity;
     private Double value;
     private String observation;
+    private Address address;
+
     //#endregion
 
     //#region Getters e Setters
@@ -48,6 +52,14 @@ public class ProdutDTO {
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
     //#endregion
 }
