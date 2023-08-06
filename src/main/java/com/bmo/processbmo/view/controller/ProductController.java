@@ -58,6 +58,14 @@ public class ProductController {
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
+
+    @Operation(summary = "Realiza o cadastro de produtos", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cadastro realizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Valores passado na requisição inválidos"),
+            @ApiResponse(responseCode = "403", description = "Usuário não autenticado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar o cadastro de produto")
+    })
     @PostMapping
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest){
         ModelMapper mapper = new ModelMapper();
@@ -74,6 +82,14 @@ public class ProductController {
      * @param id
      * @return
      */
+    @Operation(summary = "Realiza consulta de produtos por Id", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados da requisição inválida"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não autenticado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca de produto.")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ProductResponse>> getbyId(@PathVariable Integer id){
         Optional<ProdutDTO> productDTO =  productService.getbyId(id);
@@ -83,14 +99,29 @@ public class ProductController {
         return new ResponseEntity<>(Optional.of(productResponse), HttpStatus.OK);
 
     }
-
+    @Operation(summary = "Realiza delete de produto por Id", method = "DELETE")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados da requisição inválida"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "403", description = "Usuário não autenticado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca de produto.")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id){
         productService.deleteProduct(id);
         
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     };
-    
+
+    @Operation(summary = "Realiza atualização de produto por Id", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados da requisição inválida"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "403", description = "Usuário não autenticado"),
+            @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca de produto.")
+    })
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<ProductResponse> updateProduct(@RequestBody ProductRequest productRequest, @PathVariable Integer id){
