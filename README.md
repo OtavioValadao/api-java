@@ -30,7 +30,9 @@ Para contribuições, você pode seguir os seguintes Steps;
 ```
 ## Ferramentas
 
-Nessa aplicação está sendo usada Java com springboot para a criação da API, para a modelagem do banco foi utilizada um software brasileiro, BrModelo, e para a parte lógica do banco está sendo usada o SGBD Postgresql. IntelliJ, Postman e Beekeeper Studio foi usados no projeto.
+Nessa aplicação está sendo usada Java com springboot para a criação da API, para a modelagem do banco foi utilizada um software brasileiro, BrModelo, e para a parte lógica do banco está sendo usada o SGBD Postgresql. IntelliJ, Postman e Beekeeper Studio foi usados no projeto. Foi usado o Swagger para poder ser melhor em questão de documentação para ter uma melhor facilidade com a integração com o frontend.
+
+![Captura de tela de 2023-08-06 14-12-49](https://github.com/MarlonJerold/api-java/assets/63025001/434ea87a-5243-41d8-ad21-52c19c8eea4c)
 
 ## Equipe
 
