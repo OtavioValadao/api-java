@@ -8,6 +8,7 @@ Segue como funcionaria o fluxo do sistema.
 
 - [Uso](#uso)
 - [Contribuição](#contribuição)
+- [Ferramentas](#ferramentas)
 - [Equipe](#equipe)
   
 ## Uso
@@ -27,6 +28,10 @@ Para contribuições, você pode seguir os seguintes Steps;
 4. Faça push para o branch (`git push origin nova-feature`).
 5. Abra um Pull Request.
 ```
+## Ferramentas
+
+Nessa aplicação está sendo usada Java com springboot para a criação da API, para a modelagem do banco foi utilizada um software brasileiro, BrModelo, e para a parte lógica do banco está sendo usada o SGBD Postgresql. IntelliJ, Postman e Beekeeper Studio foi usados no projeto.
+
 ## Equipe
 
 - Marlon Jerold Moura Martins ([@MarlonJerold](https://github.com/MarlonJerold))
