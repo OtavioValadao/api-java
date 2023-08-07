@@ -1,14 +1,12 @@
 package com.bmo.processbmo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Address {
     //#region Atributs
     @Id
+    @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String street;

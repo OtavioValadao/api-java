@@ -1,9 +1,6 @@
 package com.bmo.processbmo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -15,6 +12,10 @@ public class Product {
     private Integer quantity;
     private Double value;
     private String observation;
+    @ManyToOne
+    @JoinColumn(name = "suplier_id")
+    private Supplier supplier;
+
     //#endregion
 
     //#region Getters e Setters
@@ -56,6 +57,14 @@ public class Product {
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
     //#endregion
 }
