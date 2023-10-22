@@ -2,6 +2,9 @@ package com.bmo.processbmo.shared;
 
 import com.bmo.processbmo.model.Address;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class ProdutDTO {
 
     private Integer id;
@@ -11,7 +14,10 @@ public class ProdutDTO {
     private String observation;
     private Address address;
 
+    private Date createDate;
     //#endregion
+
+
 
     //#region Getters e Setters
     public Integer getId() {
@@ -61,5 +67,13 @@ public class ProdutDTO {
     public void setAddress(Address address) {
         this.address = address;
     }
+
     //#endregion
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 }
