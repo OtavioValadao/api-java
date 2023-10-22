@@ -1,5 +1,8 @@
 package com.bmo.processbmo.services;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +33,30 @@ public class ProductService {
         .collect(Collectors.toList());
     }
 
+    public List<ProdutDTO> consultadoUltimosTresMeses(Integer mes) {
+
+        List<ProdutDTO> listaDeProdutos = getAll();
+        List<ProdutDTO> listaFiltrada = new ArrayList();
+
+        Date dataHoraAtual = new Date();
+
+        for (ProdutDTO produtDTO : listaDeProdutos) {
+            if(produtDTO.getCreateDate() == null ) {
+                continue;
+            }
+
+            if((produtDTO.getCreateDate().getMonth() + 1) == mes ) {
+                listaFiltrada.add(produtDTO);
+            }
+        }
+
+        if(listaFiltrada.isEmpty()){
+            throw new ResourceNotFoundException("Não existe produtos cadastros " + 1 + " mês atrás");
+        }
+
+        return listaFiltrada;
+    }
+
     /**
      * Get product searched by ID.
      * @param id Of the product that will be located.
@@ -50,7 +77,7 @@ public class ProductService {
 
     /**
      * Method to add product to the list.
-     * @param product That will be added
+     * @param productDTO That will be added
      * @return The product that was added to the list.
      */
     public ProdutDTO add(ProdutDTO productDTO){
@@ -86,7 +113,7 @@ public class ProductService {
 
     /**
      * Method that will update a product.
-     * @param product That will be updated.
+     * @param produtDTO That will be updated.
      * @return The product after updating the list.
      */
     

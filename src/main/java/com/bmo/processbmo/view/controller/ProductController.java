@@ -43,9 +43,9 @@ public class ProductController {
             @ApiResponse(responseCode = "401", description = "Usuário não autenticado"),
             @ApiResponse(responseCode = "500", description = "Erro ao realizar a busca dos produtos.")
     })
-    @GetMapping()
-    public ResponseEntity<List<ProductResponse>> getAll(){
-        List<ProdutDTO> productDTOs = productService.getAll();
+    @GetMapping("/teste/{id}")
+    public ResponseEntity<List<ProductResponse>> getAll(@PathVariable  Integer id){
+        List<ProdutDTO> productDTOs = productService.consultadoUltimosTresMeses(id);
 
         ModelMapper mapper = new ModelMapper();
 
