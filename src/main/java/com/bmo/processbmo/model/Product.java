@@ -1,6 +1,11 @@
 package com.bmo.processbmo.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Product {
@@ -10,6 +15,14 @@ public class Product {
     private Integer id;
     private String name;
     private Integer quantity;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @PrePersist
+    protected void onCreate() {
+        createDate = new Date();
+    }
+
     private Double value;
     private String observation;
     @ManyToOne
@@ -66,5 +79,13 @@ public class Product {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     //#endregion
 }

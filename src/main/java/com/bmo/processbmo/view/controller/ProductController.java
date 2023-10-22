@@ -58,7 +58,6 @@ public class ProductController {
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
-
     @Operation(summary = "Realiza o cadastro de produtos", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cadastro realizado com sucesso"),
