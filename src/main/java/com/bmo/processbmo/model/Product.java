@@ -29,6 +29,11 @@ public class Product {
     @JoinColumn(name = "suplier_id")
     private Supplier supplier;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+
     //#endregion
 
     //#region Getters e Setters
